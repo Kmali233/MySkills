@@ -1,0 +1,28 @@
+name: Validate Skills
+
+on:
+  pull_request:
+  push:
+    branches:
+      - main
+      - master
+      - work
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      - name: Validate Skill metadata and repository hygiene
+        run: python scripts/validate_skills.py
+
+      - name: Compile Python scripts
+        run: python -m compileall "The skill of converting PDF files to MD files"
