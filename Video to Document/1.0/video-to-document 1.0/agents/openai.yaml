@@ -1,0 +1,7 @@
+interface:
+  display_name: "Video to Document"
+  short_description: "Convert videos into Markdown transcript, overview, and summary"
+  default_prompt: "Use $video-to-document to transcribe this video into a Markdown document with the original transcript, an overview, and a concise summary."
+
+policy:
+  allow_implicit_invocation: true
