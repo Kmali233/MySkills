@@ -1,0 +1,7 @@
+interface:
+  display_name: "Chapter PDF to Markdown Plus Analysis"
+  short_description: "Split PDFs by chapter, convert each part to Markdown, extract images, then build per-chapter reviews and RAG outputs"
+  default_prompt: "Use $convert-pdf-to-markdown to split this PDF into chapter folders, convert each chapter PDF into Markdown, extract images with nearby figure or table captions, create a sibling directory for per-chapter deep reviews, write one complete deep-review Markdown file per chapter using references/读书 prompt (详细版).md and the extracted chapter text, then write one complete RAG knowledge-base training dataset Markdown using references/生成RAG知识库训练数据集.md and the extracted chapter text."
+
+policy:
+  allow_implicit_invocation: true

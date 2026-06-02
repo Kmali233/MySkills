@@ -1,0 +1,7 @@
+interface:
+  display_name: "PDF to Markdown Plus Analysis"
+  short_description: "Convert PDFs to Markdown with extracted images, a deep review, and a RAG dataset"
+  default_prompt: "Use $convert-pdf-to-markdown to convert this PDF into Markdown, extract its images with nearby figure or table captions, then generate a deep book-review Markdown and a RAG knowledge-base training dataset Markdown from the extracted text."
+
+policy:
+  allow_implicit_invocation: true

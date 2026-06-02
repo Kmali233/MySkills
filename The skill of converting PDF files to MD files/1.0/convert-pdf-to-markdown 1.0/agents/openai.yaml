@@ -1,0 +1,7 @@
+interface:
+  display_name: "PDF to Markdown"
+  short_description: "Convert PDFs to Markdown with extracted images"
+  default_prompt: "Use $convert-pdf-to-markdown to convert this PDF into Markdown and save its images with figure or table captions."
+
+policy:
+  allow_implicit_invocation: true
