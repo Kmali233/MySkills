@@ -11,7 +11,6 @@ Use this skill to turn a video or audio file into a Markdown document that conta
 
 - Use `scripts/video_to_document.py` as the default helper for audio extraction, local transcription when a supported transcription package is installed, and Markdown scaffolding.
 - Use `references/document-template.md` as the required output structure and section naming guide.
-- Read `references/transcription-troubleshooting.md` when ffmpeg extraction succeeds but Whisper model loading or download fails.
 
 ## Workflow
 
@@ -20,8 +19,6 @@ Use this skill to turn a video or audio file into a Markdown document that conta
 3. Transcribe the source:
    - Prefer running `scripts/video_to_document.py` when the environment has `ffmpeg` and either `openai-whisper` or `faster-whisper` installed.
    - If the user already provides a transcript, pass it with `--transcript-file` and skip transcription.
-   - If a previous run already extracted a `.wav` file, pass it with `--audio-input` to avoid repeating ffmpeg.
-   - If Whisper model download fails with SSL, EOF, `snapshot_download`, or `LocalEntryNotFoundError`, treat it as a network/proxy issue. Read `references/transcription-troubleshooting.md`, then use `--hf-endpoint`, `--download-root`, `--local-files-only`, or a local model directory.
    - If local transcription tools are missing, extract or request a transcript using whatever transcription method is available in the environment, then continue with the Markdown generation.
 4. Preserve the original transcript in the `## 原文` section. Keep timestamps when they are available because they make the document auditable.
 5. Clean only obvious transcription artifacts before summarizing. Do not silently rewrite the `## 原文` section into a paraphrase; it must remain the original transcript text.
@@ -53,9 +50,6 @@ Useful options:
 
 ```bash
 python scripts/video_to_document.py input.mp4 output.md --language zh --model small
-python scripts/video_to_document.py input.mp4 output.md --audio-input input_audio.wav --model small --language zh
-python scripts/video_to_document.py input.mp4 output.md --engine faster-whisper --model small --hf-endpoint https://hf-mirror.com
-python scripts/video_to_document.py input.mp4 output.md --engine faster-whisper --model /path/to/faster-whisper-small --local-files-only
 python scripts/video_to_document.py input.mp4 output.md --title "课程第 1 讲" --keep-audio
 python scripts/video_to_document.py input.mp4 output.md --no-timestamps
 ```
@@ -66,6 +60,5 @@ The script may create a first-pass overview and summary from the transcript. Tre
 
 - `ffmpeg` is required for extracting audio from video files when no transcript is provided.
 - `openai-whisper` or `faster-whisper` is required for local transcription by the bundled script. If neither package is installed, install one or use another available transcription source.
-- `faster-whisper` model names such as `base` or `small` may require downloading from Hugging Face. For restricted networks, prefer a local model directory or cached model plus `--local-files-only`.
 - For Chinese content, keep section headings in Chinese: `原文`, `概述`, and `总结`.
 - For multilingual videos, preserve the original language in `## 原文`; summarize in the language requested by the user, or in Chinese if no preference is specified.
